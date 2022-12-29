@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {//get ToDo-list from json file through service
     
-    this.loadData()
-;  }
+    this.loadData();
+  }
 
   //load data from service and backend
   loadData(){

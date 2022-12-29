@@ -42,5 +42,8 @@ editListItem(item: ToDoList): Observable<any> {
 deleteListItem(id: number): Observable<any> {
   return this.http.delete(this.listsUrl + id);
 }
+public getListItemById(id: number): Observable<any> {
+  return this.http.get<ToDoList>(this.listsUrl + id); 
+}
 
 }

@@ -13,12 +13,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CheckboxModule } from 'primeng/checkbox';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.services';
+import { DetailsComponent } from './to-do-list/details/details.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        DetailsComponent
     ],
     providers: [ListsService],
     bootstrap: [AppComponent],

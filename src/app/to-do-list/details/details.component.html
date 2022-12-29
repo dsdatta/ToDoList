@@ -1,0 +1,34 @@
+<div class="p-d-flex">
+    <!-- Details of selected item -->
+    <div class="p-col-6">
+      <h4>DETAILS</h4>
+
+
+      <p-table styleClass="p-datatable-sm">
+        <ng-template pTemplate="emptymessage">
+          <tr class="table">
+            <td class="text-left default fonts">Id :</td>
+            <td class="text-left fonts">{{selectedItem?.id}}</td>
+          </tr>
+          <tr class="table">
+            <td class="text-left default fonts">Task :</td>
+            <td class="text-left fonts"> {{selectedItem?.task}}</td>
+          </tr>
+          <tr class="table">
+            <td class="text-left default fonts">Description : </td>
+            <td class="text-left fonts">{{selectedItem?.description}} </td>
+          </tr>
+          <tr class="table">
+            <td class="text-left default fonts">Status :</td>
+            <td class="text-left fonts">{{selectedItem?.status}}</td>
+          </tr>
+        
+        </ng-template>
+      </p-table>
+
+    </div>
+    <button type="button" class="btn btn-success" style="float: left;" (click)="redirectToList();">
+        <i class="fa fa-arrow-circle-left"></i>
+        Retour à la liste
+    </button>
+</div>

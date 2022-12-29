@@ -1,0 +1,11 @@
+.btn-success {
+    border-color: #319db5;
+    color: rgb(255, 255, 255);
+    background-color: #319db5;
+    border: 1px;
+}
+
+.fonts{
+    font-size: 14px;
+    font-family: "Lato", "Open Sans", Helvetica, sans-serif !important;
+}

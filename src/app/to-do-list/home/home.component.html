@@ -17,10 +17,10 @@
             <!-- datatable header -->
             <ng-template pTemplate="header">
               <tr>
-                <th class="text-center" [style]="{'width' : '50.5px'}"><label>*</label></th>
-                <th class="text-center" style="width: 80px;">No.</th>
-                <th class="text-center">Tasks</th>
-                <th class="text-center">Actions</th>
+                <th class="text-center fonts" [style]="{'width' : '50.5px'}"><label>*</label></th>
+                <th class="text-center fonts" style="width: 80px;">No.</th>
+                <th class="text-center fonts">Tasks</th>
+                <th class="text-center fonts">Actions</th>
               </tr>
       
             </ng-template>
@@ -30,11 +30,12 @@
                 <td>
                   <p-checkbox [(ngModel)]="item.status" [binary]="true" (onChange)="getRow(item)"></p-checkbox>
               </td>
-                <td class="text-right">{{item.id}}</td>
-                <td class="text-center">{{item.task}}</td>
+                <td class="text-right fonts">{{item.id}}</td>
+                <td class="text-center fonts">{{item.task}}</td>
                 <td class="text-center">
                   <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: green;"></i>
                   <i class="fa fa-trash" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: #f95372;"></i>
+                  <a class="btn btn-success btn-mini" [routerLink]="['/details/',item.id]"><span class="fa fa-eye "></span></a>
                 </td>              
               </tr>
             </ng-template>
@@ -51,11 +52,12 @@
                 <td [style]="{'width' : '50.5px'}">
                   <p-checkbox [(ngModel)]="item.status" [binary]="true" (onChange)="getRow(item)"></p-checkbox>
                </td>
-                <td class="text-right" style="width: 80px;">{{item.id}}</td>
-                <td class="text-center">{{item.task}}</td>
+                <td class="text-right fonts" style="width: 80px;">{{item.id}}</td>
+                <td class="text-center fonts">{{item.task}}</td>
                 <td class="text-center">
                   <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: green;"></i>
                   <i class="fa fa-trash" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: #f95372;"></i>
+                  <a class="btn btn-success btn-mini" [routerLink]="['/details/',item.id]"><span class="fa fa-eye "></span></a>
                 </td>              
               </tr>
             </ng-template>

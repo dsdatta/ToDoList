@@ -10,3 +10,38 @@
         text-align: center;
         color: white;
       }
+
+      .btn-mini {
+        padding-left: 6px;
+        padding-right: 6px;
+        padding-top: 4px;
+        padding-bottom:4px;
+        font-size: 11px;
+        line-height: 14px;
+        vertical-align: bottom;
+    }
+    .btn-success {
+      border-color: #319db5;
+      color: rgb(255, 255, 255);
+      background-color: #319db5;
+      border: 1px;
+  }
+  
+  .btn {
+      border-image: none;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 0;
+      vertical-align: middle;
+      display: inline-block;
+      white-space: nowrap;
+      cursor: pointer;
+      background-image: none;
+      user-select: none;
+  }
+
+  .fonts{
+    font-size: 14px;
+    font-family: "Lato", "Open Sans", Helvetica, sans-serif !important;
+}
