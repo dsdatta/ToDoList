@@ -2,31 +2,37 @@
     {
     "id":"1",
     "task":"Routine",
-    "description":"Its a Routine task"
+    "description":"Its a Routine task",
+    "status":true
     },
     {
         "id":"2",
         "task":"Test",
-        "description":"Its a test task"
+        "description":"Its a test task",
+        "status":false
     },
     {
         "id":"3",
         "task":"Activate Method",
-        "description":"Its a Activate Method task"
+        "description":"Its a Activate Method task",
+        "status":false
     },
     {
         "id":"4",
         "task":"Bug fixes",
-        "description":"Work on application bugs and commit new code"
+        "description":"Work on application bugs and commit new code",
+        "status":false
     },
     {
         "id":"5",
         "task":"Lunch",
-        "description":"Its a Lunch break"
+        "description":"Its a Lunch break",
+        "status":false
     },
     {
         "id":"6",
         "task":"Gym",
-        "description":"Its Gym time"
+        "description":"Its Gym time",
+        "status":false
     }
 ]
