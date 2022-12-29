@@ -9,7 +9,13 @@
         <ng-template pTemplate="header">
           <h4 class="panel-title"><i class="fa fa-list"></i> List </h4>
         </ng-template>
-
+<!-- ajouter button -->
+<div style="padding-bottom: 5px;padding-top: 8px;">
+  <button class="btn btn-success" (click)="newItemDialog = true;"><i class="fa fa-plus-circle"></i> Ajouter</button>
+</div>
+<a style="font-size: 15px;top: 0px;">
+  <span class="badge" style="background-color:#00abff;">List Tasks : {{listToDo.length}}</span>
+</a>
           <!-- panel body -->
           <p-table #dt [value]="listToDo" [paginator]="true" [rows]="5"
           [rowsPerPageOptions]="[5,10,15,20]" rowGroupMode="subheader">
@@ -42,7 +48,7 @@
            
           </p-table>
 
-         <h6>Completed</h6> 
+         <h6>Completed :  <span class="badge" style="background-color:#00abff;">List Tasks : {{completedList.length}}</span></h6> 
           <p-table #dt [value]="completedList" [paginator]="true" [rows]="5"
           [rowsPerPageOptions]="[5,10,15,20]">
             
@@ -64,5 +70,42 @@
            
           </p-table>
 
+<!-- Dialogue creation -->
+<p-dialog [(visible)]="newItemDialog" [hidden]="!newItemDialog" appendTo="body" [modal]="true">
+  <p-header>
+      <i class="fa fa-plus-circle"></i> Nouveau Item
+  </p-header>
+  <table class="customFormTable">
+      <tr>
+          <td class="headerCell">
+              <label>Title<span style="color: red;">*</span> : </label>
+          </td>
+          <td colspan="3">
+              <input type="text" class="form-control" [(ngModel)]="newListItem.task" style="width: 500px;" />
+          </td>
+      </tr>
+      <tr>
+          <td class="headerCell">
+              <label>Description : </label>
+          </td>
+          <td colspan="3">
+              <input type="text" class="form-control" [(ngModel)]="newListItem.description" />
+          </td>
+      </tr>
+    
+  </table>
+
+  <p-footer>
+      <button type="button" class="btn btn-primary" style="margin-right: 25px;" (click)="newItemDialog = false; createListItem();" [disabled]="!newListItem.task">
+          <i class="fa fa-save"></i>
+          Enregistrer
+      </button>
+
+      <button type="button" class="btn btn-primary" style="background-color: slategray; border-color: slategray;" (click)="newItemDialog = false; clearNewListItem();">
+          <i class="fa fa-remove"></i>
+          Annuler
+      </button>
+  </p-footer>
+</p-dialog>
 
 </p-panel>

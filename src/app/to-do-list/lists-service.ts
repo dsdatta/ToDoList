@@ -26,7 +26,7 @@ getListItems(): Observable<ToDoList[]> {
 }
 
 createListItem(item: ToDoList): Observable<ToDoList> {
-  item.id = 0;
+  console.log(item);
   return this.http.post<ToDoList>(this.listsUrl, item).pipe(
     catchError((error: HttpErrorResponse) => {
       console.error(error);

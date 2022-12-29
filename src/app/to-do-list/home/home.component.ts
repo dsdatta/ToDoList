@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   listToDo: any[] = [];
   completedList: any[] = [];
   selectedCheckboxes: any = [];
+  newItemDialog = false;
+  newListItem = { "id": 0, "task": "", "description": "", "status": false };
   constructor(private listsService: ListsService) { }
 
   ngOnInit(): void {//get ToDo-list from json file through service
@@ -51,5 +53,15 @@ export class HomeComponent implements OnInit {
     this.loadData();
     
   }
+
+clearNewListItem(){
+  this.newListItem = { "id": 0,  "task": "", "description": "", "status": false};
+}
+
+createListItem(){
+  this.newListItem.id=this.listToDo.length+this.completedList.length+1;
+  this.listsService.createListItem(this.newListItem).subscribe(response => console.log(response));
+  this.loadData();
+}
 
 }

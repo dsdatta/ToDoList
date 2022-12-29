@@ -14,6 +14,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.services';
 import { DetailsComponent } from './to-do-list/details/details.component';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DetailsComponent } from './to-do-list/details/details.component';
         PanelModule,
         TableModule,
         CheckboxModule,
-        PaginatorModule
+        PaginatorModule,
+        DialogModule
     ]
 })
 export class AppModule { }
