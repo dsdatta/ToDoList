@@ -11,10 +11,11 @@ export class ListsService {
 
   private listsUrl = 'api/items/';
 //url list json file
-private _urlList: string ="assets/lists.json";
+//private _urlList: string ="assets/lists.json";
 
 constructor(private http: HttpClient) { }
 
+//get list of all items
 getListItems(): Observable<ToDoList[]> {
   return this.http.get<ToDoList[]>(this.listsUrl).pipe(
     retry(2),
@@ -25,6 +26,7 @@ getListItems(): Observable<ToDoList[]> {
   );
 }
 
+//To create new item
 createListItem(item: ToDoList): Observable<ToDoList> {
   console.log(item);
   return this.http.post<ToDoList>(this.listsUrl, item).pipe(
@@ -35,13 +37,17 @@ createListItem(item: ToDoList): Observable<ToDoList> {
   )
 }
 
+//To edit selected item
 editListItem(item: ToDoList): Observable<any> {
   return this.http.put(this.listsUrl + item.id, item);
 }
 
+//To delete selected item
 deleteListItem(id: number): Observable<any> {
   return this.http.delete(this.listsUrl + id);
 }
+
+//To fetch an item based on its id
 public getListItemById(id: number): Observable<any> {
   return this.http.get<ToDoList>(this.listsUrl + id); 
 }

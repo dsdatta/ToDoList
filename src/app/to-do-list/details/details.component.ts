@@ -18,6 +18,7 @@ selectedItem: ToDoList | undefined;
 
     //obtain item's id from url
     this.getIdFromUrl();
+    //gets item details based on id.
     this.listsService.getListItemById(parseInt(this.id)).subscribe(item =>{
       this.selectedItem=item;
       });

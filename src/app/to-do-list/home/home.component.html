@@ -5,15 +5,17 @@
 </div>
 <p-panel>
 
-        <!-- panel header -->
-        <ng-template pTemplate="header">
-          <h4 class="panel-title"><i class="fa fa-list"></i> List </h4>
-        </ng-template>
+   <!-- panel header -->
+   <ng-template pTemplate="header">
+     <h4 class="panel-title"><i class="fa fa-list"></i> List </h4>
+   </ng-template>
+
 <!-- ajouter button -->
-<div style="padding-bottom: 5px;padding-top: 8px;">
+<div style="padding-bottom: 5px;padding-top: 8px;float: right;">
   <button class="btn btn-success" (click)="newItemDialog = true;"><i class="fa fa-plus-circle"></i> Ajouter</button>
 </div>
-<a style="font-size: 15px;top: 0px;">
+
+<a style="font-size: 15px;top: 0px;position: absolute;margin-top: 146px;">
   <span class="badge" style="background-color:#00abff;">List Tasks : {{listToDo.length}}</span>
 </a>
           <!-- panel body -->
@@ -39,16 +41,16 @@
                 <td class="text-right fonts">{{item.id}}</td>
                 <td class="text-center fonts">{{item.task}}</td>
                 <td class="text-center">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: green;"></i>
-                  <i class="fa fa-trash" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: #f95372;"></i>
-                  <a class="btn btn-success btn-mini" [routerLink]="['/details/',item.id]"><span class="fa fa-eye "></span></a>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: green;cursor: pointer;" (click)="selectedItem=item;toggleEditMode()" ></i>
+                  <i class="fa fa-trash" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: #f95372;cursor: pointer;" (click)="selectedDeleteItem=item;toggleDeleteConfirm()"></i>
+                  <a class="btn btn-success btn-mini" style="cursor: pointer;" [routerLink]="['/details/',item.id]"><span class="fa fa-eye "></span></a>
                 </td>              
               </tr>
             </ng-template>
            
           </p-table>
 
-         <h6>Completed :  <span class="badge" style="background-color:#00abff;">List Tasks : {{completedList.length}}</span></h6> 
+         <h6 style="margin-top: 6px;">Completed :  <span class="badge" style="background-color:#00abff;">List Tasks : {{completedList.length}}</span></h6> 
           <p-table #dt [value]="completedList" [paginator]="true" [rows]="5"
           [rowsPerPageOptions]="[5,10,15,20]">
             
@@ -61,9 +63,9 @@
                 <td class="text-right fonts" style="width: 80px;">{{item.id}}</td>
                 <td class="text-center fonts">{{item.task}}</td>
                 <td class="text-center">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: green;"></i>
-                  <i class="fa fa-trash" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: #f95372;"></i>
-                  <a class="btn btn-success btn-mini" [routerLink]="['/details/',item.id]"><span class="fa fa-eye "></span></a>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: green;cursor: pointer;" (click)="selectedItem=item;toggleEditMode()"></i>
+                  <i class="fa fa-trash" aria-hidden="true" style="font-size: 16px; padding: 2.5px; color: #f95372;cursor: pointer;" (click)="selectedDeleteItem=item;toggleDeleteConfirm()"></i>
+                  <a class="btn btn-success btn-mini" style="cursor: pointer;" [routerLink]="['/details/',item.id]"><span class="fa fa-eye"></span></a>
                 </td>              
               </tr>
             </ng-template>
@@ -71,7 +73,7 @@
           </p-table>
 
 <!-- Dialogue creation -->
-<p-dialog [(visible)]="newItemDialog" [hidden]="!newItemDialog" appendTo="body" [modal]="true">
+<p-dialog [(visible)]="newItemDialog" [hidden]="!newItemDialog" appendTo="body" [modal]="true" [closable]="false">
   <p-header>
       <i class="fa fa-plus-circle"></i> Nouveau Item
   </p-header>
@@ -102,6 +104,84 @@
       </button>
 
       <button type="button" class="btn btn-primary" style="background-color: slategray; border-color: slategray;" (click)="newItemDialog = false; clearNewListItem();">
+          <i class="fa fa-remove"></i>
+          Annuler
+      </button>
+  </p-footer>
+</p-dialog>
+
+  <!-- Dialogue  modification -->
+  <p-dialog [(visible)]="editMode" [hidden]="!editMode" appendTo="body" [modal]="true">
+    <p-header>
+        <i class="fa fa-edit"></i> Modifier
+    </p-header>
+    <table class="customFormTable">
+        <tr>
+            <td class="headerCell">
+                <label>Title : </label>
+            </td>
+            <td colspan="3">
+                <input type="text" class="form-control" [(ngModel)]="currentEditingItem.task" />
+            </td>
+        </tr>
+        <tr>
+            <td class="headerCell">
+                <label>Description : </label>
+            </td>
+            <td colspan="3">
+                <input type="text" class="form-control" [(ngModel)]="currentEditingItem.description" style="width: 500px;" />
+            </td>
+        </tr>
+    </table>
+
+    <p-footer>
+        <button type="button" class="btn btn-primary" style="margin-right: 25px;" (click)="saveListItem();editMode = false;" [disabled]="!currentEditingItem.task">
+            <i class="fa fa-save"></i>
+            Enregistrer
+        </button>
+
+        <button type="button" class="btn btn-primary" style="background-color: slategray; border-color: slategray;" (click)="editMode = false;">
+            <i class="fa fa-remove"></i>
+            Fermer
+        </button>
+    </p-footer>
+</p-dialog>
+
+<!-- Dialogue deleteion -->
+<p-dialog [(visible)]="confirmDelete" [hidden]="!confirmDelete" appendTo="body" [modal]="true">
+  <p-header>
+      <i class="fa fa-trash-o"></i> Supprimer
+  </p-header>
+
+  <label><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color: darkorange;"></i> Supprimer cet &#233;l&#233;ment ?</label>
+  <br />
+
+  <table class="customFormTable">
+      <tr>
+          <td class="headerCell">
+              <label>Title : </label>
+          </td>
+          <td colspan="3">
+              <input type="text" class="form-control" [ngModel]="selectedDeleteItem.task" disabled="disabled" />
+          </td>
+      </tr>
+      <tr>
+          <td class="headerCell">
+              <label>Description : </label>
+          </td>
+          <td colspan="3">
+              <input type="text" class="form-control" [ngModel]="selectedDeleteItem.description" style="width: 500px;" disabled="disabled" />
+          </td>
+      </tr>
+  </table>
+
+  <p-footer>
+      <button type="button" class="btn btn-danger" style="margin-right: 25px;" (click)="deleteListItem(); confirmDelete=false; ">
+          <i class="fa fa-trash"></i>
+          Supprimer
+      </button>
+
+      <button type="button" class="btn btn-primary" style="background-color: slategray; border-color: slategray;" (click)="confirmDelete=false; ">
           <i class="fa fa-remove"></i>
           Annuler
       </button>

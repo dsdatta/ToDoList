@@ -45,3 +45,8 @@
     font-size: 14px;
     font-family: "Lato", "Open Sans", Helvetica, sans-serif !important;
 }
+
+button.btn.btn-primary {
+  background: #00abff;
+  border-color: #00abff;
+}
